@@ -29,4 +29,15 @@ public class FramePanel extends JPanel implements Frame{
         return label;
     }
 
+    public PanelButton addButton(int x, int y, int width, int height){
+        PanelButton button = new PanelButton(x, y, width, height);
+        this.add(button);
+        return button;
+    }
+
+    //public void addAllButtons(){
+    //  PanelButton button = addButton(200, 100, 100 , 50);
+    //} 
+    
+
 }
