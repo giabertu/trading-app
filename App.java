@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 public class App{
 
     public static void main(String[] args) {
+      LoginFrame loginFrame = new LoginFrame();
       
 
       AppFrame frame = new AppFrame();

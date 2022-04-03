@@ -1,15 +1,24 @@
 package view;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JTextField;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 
 
-public class AppFrame extends JFrame implements ActionListener, Frame {
+public class AppFrame extends JFrame implements Frame {
     
-    PanelButton buttonDeposit;
+    public PanelButton buttonDeposit;
+    public PanelButton buttonWithdraw;
+    public JTextField depositField;
+    public JTextField withdrawField;
+    public JMenuBar menuBar = new JMenuBar();
 
     public AppFrame() {
 
@@ -21,13 +30,14 @@ public class AppFrame extends JFrame implements ActionListener, Frame {
         this.getContentPane().setBackground(Color.lightGray); //change background color.
     
         this.setResizable(false); //this prevents the frame from being resized
-        this.setVisible(true); //make frame visible
 
         addAllPanels();
+        addAllMenus();
         this.setLayout(null);
+
         //this.pack(); //sets the size of frame to accomodate all components. Make sure to add
         //All components before using pack. 
-        
+        this.setVisible(true); //make frame visible
     }
 
     @Override
@@ -73,19 +83,49 @@ public class AppFrame extends JFrame implements ActionListener, Frame {
         FramePanel greenPanel = this.addPanel(Color.GREEN, 750, 0, 150, 700);
         //greenPanel.addLabel("Portfolio", 0, 0, "portfolio.png");
         //PanelButton button = bluePanel.addButton(200, 100, 100, 50);
-        buttonDeposit = new PanelButton(450, 50 , 75, 35);
+        buttonDeposit = new PanelButton(400, 150 , 150, 50);
         buttonDeposit.setText("Deposit");
-        buttonDeposit.setFont(new Font("Arial", Font.BOLD, 10));
-        buttonDeposit.setFocusable(false);
-        buttonDeposit.addActionListener(this);
+        buttonDeposit.setFont(new Font("Arial", Font.PLAIN, 20));
+        //buttonDeposit.setFocusable(false);
+        //buttonDeposit.addActionListener(this);
         bluePanel.add(buttonDeposit);
+        depositField = new JTextField();
+        depositField.setPreferredSize(new Dimension(80,30));
+        //depositField.setBounds(450, 215, 100, 50);5
+        bluePanel.add(depositField);
+
+        buttonWithdraw = new PanelButton(400, 150 , 150, 50);
+        buttonWithdraw.setText("Withdraw");
+        buttonWithdraw.setFont(new Font("Arial", Font.PLAIN, 20));
+        //buttonDeposit.setFocusable(false);
+        //buttonDeposit.addActionListener(this);
+        bluePanel.add(buttonWithdraw);
+        withdrawField = new JTextField();
+        withdrawField.setPreferredSize(new Dimension(80,30));
+        //depositField.setBounds(450, 215, 100, 50);
+        bluePanel.add(withdrawField);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == buttonDeposit){
-            System.out.println("I was pressed");
-        }
+    public void addAllMenus(){
+        JMenu refresh = new JMenu("Refresh");
+        menuBar.add(refresh);
+
+        this.setJMenuBar(menuBar);
     }
+
+    public void addButtonDepositActionListener(ActionListener listener) {
+        buttonDeposit.addActionListener(listener);
+    }
+
+    public void addButtonWithdrawActionListener(ActionListener listener) {
+        buttonWithdraw.addActionListener(listener);
+    }
+
+    //@Override
+   // public void actionPerformed(ActionEvent e) {
+        //if(e.getSource() == buttonDeposit){
+        //  System.out.println("I was pressed");
+        //}
+   // }
 
 }
