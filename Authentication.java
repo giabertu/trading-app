@@ -8,21 +8,23 @@ import java.io.PrintWriter;
 public class Authentication {
     public static File login;
    
-    public static void createFile(String username, String pw)throws IOException{
-        if (!login.exists()){
-        PrintWriter outputStream = new PrintWriter(new FileWriter(login));
+    public static void createFile(User user)throws IOException{
+        if (!new File("login.txt").exists()){
+            login = new File("login.txt");
+            PrintWriter outputStream = new PrintWriter(new FileWriter(login));
         
-        outputStream.println(username + "\n" + pw);
-        outputStream.close();
-        return;
+            outputStream.println(user.getName() + "\n" + user.getPw());
+            outputStream.close();
+            return;
         }
         System.out.println("You are trying to recreate override login details. Not allowed");
     }
 
-    public static boolean isAuthentic(String username, String pw)throws IOException{
-        if (login.exists()){
+    public static boolean isAuthentic(User user)throws IOException{
+        if (new File("login.txt").exists()){
+            login = new File("login.txt");
             BufferedReader inputStream = new BufferedReader(new FileReader(login));
-            if(inputStream.readLine().equals(username) && inputStream.readLine().equals(pw)){
+            if(inputStream.readLine().equals(user.getName()) && inputStream.readLine().equals(user.getPw())){
             return true;
             }
         }

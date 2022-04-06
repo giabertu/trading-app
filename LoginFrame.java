@@ -1,4 +1,7 @@
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import java.awt.Color;
@@ -6,42 +9,48 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 import view.FramePanel;
-import view.PanelButton;
 
 public class LoginFrame extends JFrame {
 
     public JTextField usernameField;
     public JTextField pwField;
-    public PanelButton submitButton;
+    public JButton submitButton;
+    public LoginFrame() {
 
-    public LoginFrame(){
-
-        this.setSize(400, 400);
+        this.setTitle("Login Window");
+        //this.setSize(400, 400);
         addAllButtonsAndFields();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setLayout(null);
         this.setResizable(false);
-        this.setLayout(null);
+        this.pack();
         this.setVisible(true);
     }
 
-    public void addAllButtonsAndFields(){
+    public void addAllButtonsAndFields() {
         FramePanel panel = new FramePanel(Color.WHITE, 0, 0, 400, 400);
-        this.add(panel);
-        submitButton = new PanelButton(150, 300, 100, 50);
-        submitButton.setText("Create Account");
-        panel.add(submitButton);
+
+        JLabel l = new JLabel("Username", JLabel.TRAILING);
+        panel.add(l);
         usernameField = new JTextField();
-        usernameField.setPreferredSize(new Dimension(100, 50));
-        usernameField.setText("username");
+        usernameField.setPreferredSize(new Dimension(100,30));
+        l.setLabelFor(usernameField);
         panel.add(usernameField);
+        
+        JLabel pw = new JLabel("Password", JLabel.TRAILING);
+        panel.add(pw);
         pwField = new JTextField();
-        pwField.setPreferredSize(new Dimension(100, 50));
-        //pwField.setBounds(150, 250, 100, 50);
-        pwField.setText("password"); 
+        pwField.setPreferredSize(new Dimension(100,30));
+        pw.setLabelFor(pwField);
         panel.add(pwField);
+
+        submitButton = new JButton();
+        submitButton.setText("Login");
+        panel.add(submitButton);
+        this.add(panel);
     }
 
-    public void addSubmitActionListener(ActionListener e){
+    public void addSubmitActionListener(ActionListener e) {
         submitButton.addActionListener(e);
     }
 }
