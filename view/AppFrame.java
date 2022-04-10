@@ -2,6 +2,7 @@ package view;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -10,17 +11,20 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import control.User;
 
 
-public class AppFrame extends JFrame implements Frame {
+public class AppFrame<User> extends JFrame implements Frame {
     
     public JButton buttonDeposit;
     public JButton buttonWithdraw;
     public JTextField depositField;
     public JTextField withdrawField;
+    public JLabel accountInfo;
     public JMenuBar menuBar = new JMenuBar();
 
     public AppFrame() {
@@ -130,6 +134,15 @@ public class AppFrame extends JFrame implements Frame {
         centerPanel.add(buttonWithdraw);
         centerPanel.add(withdrawField);
 
+        /***********************TOP PANEL************************* */
+        accountInfo = new JLabel();
+        accountInfo.setText("Account Value: $0"  +
+         "\nFree balance: $0");
+        
+        panel1.add(accountInfo);
+
+
+
 
         /**
 
@@ -176,6 +189,11 @@ public class AppFrame extends JFrame implements Frame {
 
     public void addButtonWithdrawActionListener(ActionListener listener) {
         buttonWithdraw.addActionListener(listener);
+    }
+
+    public void displayAccount(JLabel label, User user){
+        label.setText("Account Value: " + ((control.User) user).getAccount().getTotBalance() +
+         "\nFree balance: " + ((control.User) user).getAccount().getFreeBalance());
     }
 
     //@Override

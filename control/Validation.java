@@ -1,9 +1,8 @@
+package control;
 import javax.swing.JOptionPane;
 
 public class Validation {
    
-    
-
     public static int inputInt(String message){
         int input = Integer.parseInt(message);
         while (input < 0){

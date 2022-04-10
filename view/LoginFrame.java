@@ -1,3 +1,4 @@
+package view;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,9 +8,6 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
-
-import view.AppFrame;
-import view.FramePanel;
 
 public class LoginFrame extends JFrame {
 

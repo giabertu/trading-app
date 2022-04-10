@@ -1,4 +1,5 @@
 import view.AppFrame;
+import view.LoginFrame;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +9,9 @@ import java.math.BigDecimal;
 
 import javax.swing.JOptionPane;
 
+import control.Authentication;
+import control.User;
+import control.Validation;
 import model.StockWrapper;
 import service.StockService;
 public class App{
@@ -76,11 +80,15 @@ public class App{
                 int amount = Validation.inputInt(frame.depositField.getText());
                 System.out.println(amount);
                 user.getAccount().deposit(amount);
+                frame.displayAccount(frame.accountInfo, user);
               }
               catch (Exception exc){JOptionPane.showMessageDialog(null, "Invalid input. Try again");}
             }
         }
       });
+
+      //add the change to the account displayed inside the deposit and withdraw methods of account.
+
 
       frame.addButtonWithdrawActionListener(new ActionListener() {
         @Override
@@ -88,9 +96,10 @@ public class App{
             System.out.println("I was pressed");
             if(e.getSource() == frame.buttonWithdraw){
               try{
-                int amount = Validation.inputInt(frame.depositField.getText());
+                int amount = Validation.inputInt(frame.withdrawField.getText());
                 System.out.println(amount);
                 user.getAccount().withdraw(amount);
+                frame.displayAccount(frame.accountInfo, user);
               }
               catch (Exception exc){JOptionPane.showMessageDialog(null, "Invalid input. Try again");}
             }
