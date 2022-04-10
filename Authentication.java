@@ -25,8 +25,10 @@ public class Authentication {
             login = new File("login.txt");
             BufferedReader inputStream = new BufferedReader(new FileReader(login));
             if(inputStream.readLine().equals(user.getName()) && inputStream.readLine().equals(user.getPw())){
-            return true;
+                inputStream.close();
+                return true;
             }
+            inputStream.close();
         }
         return false;
     }

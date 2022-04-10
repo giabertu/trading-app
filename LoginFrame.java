@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
+import view.AppFrame;
 import view.FramePanel;
 
 public class LoginFrame extends JFrame {
@@ -15,6 +16,8 @@ public class LoginFrame extends JFrame {
     public JTextField usernameField;
     public JTextField pwField;
     public JButton submitButton;
+    public AppFrame newFrame;
+
     public LoginFrame() {
 
         this.setTitle("Login Window");

@@ -4,16 +4,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 
 import javax.swing.JOptionPane;
 
+import model.StockWrapper;
 import service.StockService;
 public class App{
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
       LoginFrame loginFrame = new LoginFrame();
       addLoginActionListener(loginFrame);
       AppFrame frame = loginFrame.newFrame;
+
+      
       StockService stockService = new StockService();
 		  StockWrapper stock = stockService.findStock("AAPL");
 		  System.out.println(stock.getStock());

@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import javax.print.attribute.standard.JobHoldUntil;
 import javax.swing.JOptionPane;
 
 import model.StockWrapper;
@@ -48,4 +47,6 @@ public class Account{
             portfolio.add(stockOwned);
         } 
     }
+
+    //create sellStock method
 }

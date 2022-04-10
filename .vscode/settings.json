@@ -1,0 +1,10 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/Users/jean/Desktop/DevProjects/oop_exercises/miniproject/jar_files/jackson-annotations-2.9.0.jar",
+        "/Users/jean/Desktop/DevProjects/oop_exercises/miniproject/jar_files/jackson-core-2.9.8.jar",
+        "/Users/jean/Desktop/DevProjects/oop_exercises/miniproject/jar_files/jackson-databind-2.9.8.jar",
+        "/Users/jean/Desktop/DevProjects/oop_exercises/miniproject/jar_files/slf4j-api-1.7.25.jar",
+        "/Users/jean/Desktop/DevProjects/oop_exercises/miniproject/jar_files/YahooFinanceAPI-3.15.0.jar"
+    ]
+}
