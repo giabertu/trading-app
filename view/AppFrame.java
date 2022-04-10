@@ -1,10 +1,13 @@
 package view;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Color;
@@ -14,8 +17,8 @@ import java.awt.Font;
 
 public class AppFrame extends JFrame implements Frame {
     
-    public PanelButton buttonDeposit;
-    public PanelButton buttonWithdraw;
+    public JButton buttonDeposit;
+    public JButton buttonWithdraw;
     public JTextField depositField;
     public JTextField withdrawField;
     public JMenuBar menuBar = new JMenuBar();
@@ -29,11 +32,11 @@ public class AppFrame extends JFrame implements Frame {
         this.setIconImage(new ImageIcon("appIcon.png").getImage());
         this.getContentPane().setBackground(Color.lightGray); //change background color.
     
-        this.setResizable(false); //this prevents the frame from being resized
+        //this.setResizable(false); //this prevents the frame from being resized
 
+        this.setLayout(new BorderLayout(10,10));
         addAllPanels();
         addAllMenus();
-        this.setLayout(null);
 
         //this.pack(); //sets the size of frame to accomodate all components. Make sure to add
         //All components before using pack. 
@@ -79,9 +82,60 @@ public class AppFrame extends JFrame implements Frame {
 
     public void addAllPanels(){
 
-        FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
-        FramePanel bluePanel = this.addPanel(Color.BLUE, 150, 0, 600, 250);
-        FramePanel greenPanel = this.addPanel(Color.GREEN, 750, 0, 150, 700);
+        /************************ CREATING, ADDING PANELS***************/
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
+        JPanel panel3 = new JPanel();
+        JPanel panel4 = new JPanel();
+        JPanel centerPanel = new JPanel();
+
+        panel1.setBackground(Color.RED);
+        panel2.setBackground(Color.GREEN);
+        panel3.setBackground(Color.YELLOW);
+        panel4.setBackground(Color.MAGENTA);
+        centerPanel.setBackground(Color.BLUE);
+
+        panel1.setPreferredSize(new Dimension(100,100));
+        panel2.setPreferredSize(new Dimension(100,100));
+        panel3.setPreferredSize(new Dimension(100,100));
+        panel4.setPreferredSize(new Dimension(100,100));
+        centerPanel.setPreferredSize(new Dimension(100,100));
+
+        this.add(panel1, BorderLayout.NORTH);
+        this.add(panel2, BorderLayout.WEST);
+        this.add(panel3, BorderLayout.EAST);
+        this.add(panel4, BorderLayout.SOUTH);
+        this.add(centerPanel, BorderLayout.CENTER);
+
+        /*********************** CENTER PANEL*************************/
+        buttonDeposit = new JButton();
+        buttonWithdraw = new JButton();
+
+        buttonDeposit.setPreferredSize(new Dimension(100, 30));
+        buttonWithdraw.setPreferredSize(new Dimension(100, 30));
+
+        buttonDeposit.setText("Deposit");
+        buttonWithdraw.setText("Withdraw");
+
+        depositField = new JTextField();
+        withdrawField = new JTextField();
+
+        depositField.setPreferredSize(new Dimension(75, 20));
+        withdrawField.setPreferredSize(new Dimension(75, 20));
+
+
+        centerPanel.add(buttonDeposit);
+        centerPanel.add(depositField);
+
+        centerPanel.add(buttonWithdraw);
+        centerPanel.add(withdrawField);
+
+
+        /**
+
+        //FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
+        //FramePanel bluePanel = this.addPanel(Color.BLUE, 150, 0, 600, 250);
+        //FramePanel greenPanel = this.addPanel(Color.GREEN, 750, 0, 150, 700);
         bluePanel.setLayout(null);
         //greenPanel.addLabel("Portfolio", 0, 0, "portfolio.png");
         //PanelButton button = bluePanel.addButton(200, 100, 100, 50);
@@ -106,6 +160,7 @@ public class AppFrame extends JFrame implements Frame {
         //withdrawField.setPreferredSize(new Dimension(80,30));
         depositField.setBounds(425, 150, 80, 40);
         bluePanel.add(withdrawField);
+        */
     }
 
     public void addAllMenus(){
