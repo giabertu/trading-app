@@ -18,7 +18,7 @@ public class App{
       addLoginActionListener(loginFrame);
       AppFrame frame = loginFrame.newFrame;
 
-      
+
       StockService stockService = new StockService();
 		  StockWrapper stock = stockService.findStock("AAPL");
 		  System.out.println(stock.getStock());
@@ -41,7 +41,7 @@ public class App{
                 loginFrame.setVisible(false);
                 AppFrame frame = new AppFrame();
                 loginFrame.newFrame = frame;
-                addActionListeners(frame);
+                addActionListeners(frame,user);
               }
               catch(Exception exception){}
             }
@@ -52,7 +52,7 @@ public class App{
                   loginFrame.setVisible(false);
                   AppFrame frame = new AppFrame();
                   loginFrame.newFrame = frame;
-                  addActionListeners(frame);
+                  addActionListeners(frame, user);
                 }
                 else{
                   JOptionPane.showMessageDialog(null, "Wrong Login Details. Try again.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -65,7 +65,7 @@ public class App{
       });
     }
 
-    public static void addActionListeners(AppFrame frame){
+    public static void addActionListeners(AppFrame frame, User user){
 
       frame.addButtonDepositActionListener(new ActionListener() {
         @Override
@@ -73,8 +73,9 @@ public class App{
             System.out.println("I was pressed");
             if(e.getSource() == frame.buttonDeposit){
               try{
-                int input = Validation.inputInt(frame.depositField.getText());
-                System.out.println(input);
+                int amount = Validation.inputInt(frame.depositField.getText());
+                System.out.println(amount);
+                user.getAccount().deposit(amount);
               }
               catch (Exception exc){JOptionPane.showMessageDialog(null, "Invalid input. Try again");}
             }
@@ -87,8 +88,9 @@ public class App{
             System.out.println("I was pressed");
             if(e.getSource() == frame.buttonWithdraw){
               try{
-                int input = Validation.inputInt(frame.depositField.getText());
-                System.out.println(input);
+                int amount = Validation.inputInt(frame.depositField.getText());
+                System.out.println(amount);
+                user.getAccount().withdraw(amount);
               }
               catch (Exception exc){JOptionPane.showMessageDialog(null, "Invalid input. Try again");}
             }

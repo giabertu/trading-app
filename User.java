@@ -16,5 +16,9 @@ public class User {
     public String getPw(){
         return pw;
     }
+    
+    public Account getAccount(){
+        return account;
+    }
 
 }

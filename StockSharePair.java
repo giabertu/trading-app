@@ -20,11 +20,19 @@ public class StockSharePair {
         totValue = new StockService().findPrice(this.stock).multiply(sharesOwned);
     }
 
+    public void addShares(double amount) throws IOException{
+        sharesOwned = sharesOwned.add(new BigDecimal(amount).divide(stock.getPrice()));
+    }
+
     public BigDecimal getSharesOwned(){
         return sharesOwned;
     }
 
     public StockWrapper getStock(){
         return stock;
+    }
+
+    public BigDecimal getTotValue(){
+        return totValue;
     }
 }

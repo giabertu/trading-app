@@ -1,6 +1,10 @@
 package model;
 
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+
+import service.StockService;
 import yahoofinance.Stock;
 
 public class StockWrapper {
@@ -16,8 +20,16 @@ public class StockWrapper {
         return stock;
     }
 
+    public BigDecimal getPrice() throws IOException{
+        return new StockService().findPrice(this);
+    }
+
     public LocalDateTime getLastAccessed() {
         return lastAccessedTime;
+    }
+
+    public String getName() {
+        return stock.getName();
     }
     
 }
