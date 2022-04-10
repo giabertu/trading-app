@@ -78,31 +78,33 @@ public class AppFrame extends JFrame implements Frame {
 
 
     public void addAllPanels(){
+
         FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
-        FramePanel bluePanel = this.addPanel(Color.BLUE, 150, 100, 600, 250);
+        FramePanel bluePanel = this.addPanel(Color.BLUE, 150, 0, 600, 250);
         FramePanel greenPanel = this.addPanel(Color.GREEN, 750, 0, 150, 700);
+        bluePanel.setLayout(null);
         //greenPanel.addLabel("Portfolio", 0, 0, "portfolio.png");
         //PanelButton button = bluePanel.addButton(200, 100, 100, 50);
-        buttonDeposit = new PanelButton(400, 150 , 150, 50);
+        buttonDeposit = new PanelButton(0, 150 , 100, 40);
         buttonDeposit.setText("Deposit");
-        buttonDeposit.setFont(new Font("Arial", Font.PLAIN, 20));
+        buttonDeposit.setFont(new Font("Arial", Font.PLAIN, 15));
         //buttonDeposit.setFocusable(false);
         //buttonDeposit.addActionListener(this);
         bluePanel.add(buttonDeposit);
         depositField = new JTextField();
-        depositField.setPreferredSize(new Dimension(80,30));
-        //depositField.setBounds(450, 215, 100, 50);5
+        //depositField.setPreferredSize(new Dimension(80,30));
+        depositField.setBounds(125, 150, 80, 40);
         bluePanel.add(depositField);
 
-        buttonWithdraw = new PanelButton(400, 150 , 150, 50);
+        buttonWithdraw = new PanelButton(300, 150 , 100, 40);
         buttonWithdraw.setText("Withdraw");
-        buttonWithdraw.setFont(new Font("Arial", Font.PLAIN, 20));
+        buttonWithdraw.setFont(new Font("Arial", Font.PLAIN, 15));
         //buttonDeposit.setFocusable(false);
         //buttonDeposit.addActionListener(this);
         bluePanel.add(buttonWithdraw);
         withdrawField = new JTextField();
-        withdrawField.setPreferredSize(new Dimension(80,30));
-        //depositField.setBounds(450, 215, 100, 50);
+        //withdrawField.setPreferredSize(new Dimension(80,30));
+        depositField.setBounds(425, 150, 80, 40);
         bluePanel.add(withdrawField);
     }
 
