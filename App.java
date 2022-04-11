@@ -28,6 +28,8 @@ public class App{
 		  StockWrapper stock = stockService.findStock("AAPL");
 		  System.out.println(stock.getStock());
 		  BigDecimal stockPrice = stockService.findPrice(stock);
+      System.out.println(stock.getStock().getHistory().get(12).getHigh());
+      System.out.println(stock.getStock().getHistory().size());
 		  System.out.println(stockPrice);
 
 

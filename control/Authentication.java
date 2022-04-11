@@ -18,7 +18,7 @@ public class Authentication {
             outputStream.close();
             return;
         }
-        System.out.println("You are trying to recreate override login details. Not allowed");
+        System.out.println("You are trying to override login details. Not allowed");
     }
 
     public static boolean isAuthentic(User user)throws IOException{
