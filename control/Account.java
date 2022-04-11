@@ -1,6 +1,7 @@
 package control;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -61,16 +62,29 @@ public class Account{
             JOptionPane.showMessageDialog(null, "You don't have enough free funds for this transation", "Purchase Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        for (int i = 0; i < portfolio.size(); i++){
-            if (stock.getStock().getName().equals((portfolio.get(i).getStock()).getName())){
-                portfolio.get(i).addShares(amount);
-                return;
-            }
+        else if(portfolio.contains(stock)){
+            portfolio.get(portfolio.indexOf(stock)).addShares(amount);;
+            return;
         }
-        StockSharePair stockOwned = new StockSharePair(stock, new StockService().findPrice(stock).divide(new BigDecimal(amount)));
+        StockSharePair stockOwned = new StockSharePair(stock, new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
         portfolio.add(stockOwned);
+        freeBalance -= amount;
     }
 
-    //create sellStock method
+    public void sellStock(StockWrapper stock, double amount) throws IOException{
+        BigDecimal bdAmount = new BigDecimal(amount);
+        BigDecimal valueSharesOwned = portfolio.get(portfolio.indexOf(stock)).getTotValue(); 
+        if (bdAmount.compareTo(valueSharesOwned) == 1){
+            JOptionPane.showMessageDialog(null, "You don't have enough shares to sell", "Sale Error", JOptionPane.ERROR_MESSAGE);
+            return; 
+        }
+        else if(bdAmount.compareTo(valueSharesOwned) == 0){
+            portfolio.remove(stock);
+            freeBalance += amount;
+            return;
+        }
+        portfolio.get(portfolio.indexOf(stock)).removeShares(amount);
+        freeBalance += amount;
+    }
     //create method to calculate totBalance 
 }

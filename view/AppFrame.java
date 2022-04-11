@@ -7,15 +7,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.text.JTextComponent;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import control.User;
+import model.StockWrapper;
+import service.StockService;
 
 
 public class AppFrame<User> extends JFrame implements Frame {
@@ -23,13 +27,21 @@ public class AppFrame<User> extends JFrame implements Frame {
     public JButton buttonDeposit;
     public JButton buttonWithdraw;
     public JButton buttonSearch;
+    public JButton buttonBuy;
+    public JButton buttonSell;
 
     public JTextField depositField;
     public JTextField withdrawField;
     public JTextField searchField;
+    public JTextField buyField;
+    public JTextField sellField;
 
     public JLabel accountInfo;
     public JLabel searchLabel;
+    public JLabel stockLabel;
+
+    public StockWrapper currentStock;
+
 
     public JMenuBar menuBar = new JMenuBar();
 
@@ -165,9 +177,31 @@ public class AppFrame<User> extends JFrame implements Frame {
         centerPanel.add(searchField);
         centerPanel.add(buttonSearch);
 
+        //display stock and price
+        stockLabel = new JLabel();
+        stockLabel.setText("No stock has been searched yet.");
+        stockLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        centerPanel.add(stockLabel);
 
+        //buy and sell buttons
+        buttonBuy = new JButton("Buy");
+        buttonSell = new JButton("Sell");
 
+        buyField = new JTextField(); 
+        sellField = new JTextField();
 
+        buyField.setPreferredSize(new Dimension(100,30));
+        sellField.setPreferredSize(new Dimension(100,30));
+
+        buttonBuy.setVisible(false);
+        buttonSell.setVisible(false);
+        buyField.setVisible(false);
+        sellField.setVisible(false);
+
+        centerPanel.add(buttonBuy);
+        centerPanel.add(buyField);
+        centerPanel.add(buttonSell);
+        centerPanel.add(sellField);
         /**6
 
         //FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
@@ -219,9 +253,27 @@ public class AppFrame<User> extends JFrame implements Frame {
         buttonSearch.addActionListener(listener);
     }
 
+    public void AddButtonBuyActionListener(ActionListener listener){
+        buttonBuy.addActionListener(listener);
+    }
+
+    public void AddButtonSellActionListener(ActionListener listener){
+        buttonSell.addActionListener(listener);
+    }
+
     public void displayAccount(JLabel label, User user){
-        label.setText("Account Value: " + ((control.User) user).getAccount().getTotBalance() +
-         "\nFree balance: " + ((control.User) user).getAccount().getFreeBalance());
+        label.setText("Account Value: $" + ((control.User) user).getAccount().getTotBalance() +
+         "\nFree balance: $" + ((control.User) user).getAccount().getFreeBalance());
+    }
+
+    public void displayStock(JLabel label, StockWrapper stock) throws IOException{
+        label.setText("You searched for: " + stock.getName() + ", which has price " + stock.getPrice().toString());
+        currentStock = stock;
+
+        buttonBuy.setVisible(true);
+        buttonSell.setVisible(true);
+        buyField.setVisible(true);
+        sellField.setVisible(true);
     }
 
     //@Override

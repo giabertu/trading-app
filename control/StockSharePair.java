@@ -1,6 +1,7 @@
 package control;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import model.StockWrapper;
 import service.StockService;
@@ -22,7 +23,15 @@ public class StockSharePair {
     }
 
     public void addShares(double amount) throws IOException{
-        sharesOwned = sharesOwned.add(new BigDecimal(amount).divide(stock.getPrice()));
+        sharesOwned = sharesOwned.add(new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
+        calculateTotValue();
+    }
+
+    public void removeShares(double amount) throws IOException{
+        BigDecimal newTotValue = totValue.subtract(new BigDecimal(amount));
+        BigDecimal newSharesOwned = newTotValue.divide(stock.getPrice(), 2, RoundingMode.HALF_UP);
+        sharesOwned = newSharesOwned;
+        calculateTotValue();
     }
 
     public BigDecimal getSharesOwned(){
