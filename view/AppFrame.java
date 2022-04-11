@@ -39,6 +39,7 @@ public class AppFrame<User> extends JFrame implements Frame {
     public JLabel accountInfo;
     public JLabel searchLabel;
     public JLabel stockLabel;
+    public JLabel portfolioLabel;
 
     public StockWrapper currentStock;
 
@@ -108,13 +109,13 @@ public class AppFrame<User> extends JFrame implements Frame {
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
-        JPanel panel4 = new JPanel();
+        JPanel bottomPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
         panel1.setBackground(Color.white);
         panel2.setBackground(Color.GREEN);
         panel3.setBackground(Color.YELLOW);
-        panel4.setBackground(Color.MAGENTA);
+        bottomPanel.setBackground(Color.white);
         centerPanel.setBackground(Color.white);
 
         //centerPanel.setLayout(new GridLayout());
@@ -122,13 +123,13 @@ public class AppFrame<User> extends JFrame implements Frame {
         panel1.setPreferredSize(new Dimension(100,100));
         panel2.setPreferredSize(new Dimension(100,100));
         panel3.setPreferredSize(new Dimension(100,100));
-        panel4.setPreferredSize(new Dimension(100,100));
+        bottomPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setPreferredSize(new Dimension(100,100));
 
         this.add(panel1, BorderLayout.NORTH);
         this.add(panel2, BorderLayout.WEST);
         this.add(panel3, BorderLayout.EAST);
-        this.add(panel4, BorderLayout.SOUTH);
+        this.add(bottomPanel, BorderLayout.SOUTH);
         this.add(centerPanel, BorderLayout.CENTER);
 
         /*********************** TOP PANEL*************************/
@@ -158,7 +159,7 @@ public class AppFrame<User> extends JFrame implements Frame {
         panel1.add(buttonWithdraw);
         panel1.add(withdrawField);
 
-        //Search Field stock:
+        /**************************CENTER PANEL****************** */
 
         searchLabel = new JLabel("Search Stock Ticker:");
         searchField = new JTextField();
@@ -202,6 +203,35 @@ public class AppFrame<User> extends JFrame implements Frame {
         centerPanel.add(buyField);
         centerPanel.add(buttonSell);
         centerPanel.add(sellField);
+
+
+        /****************************BOTTOM PANEL*****************8**** */
+
+        portfolioLabel = new JLabel();
+
+        portfolioLabel.setText("No Stocks Owned");
+        portfolioLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+
+        bottomPanel.add(portfolioLabel);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         /**6
 
         //FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
@@ -274,6 +304,10 @@ public class AppFrame<User> extends JFrame implements Frame {
         buttonSell.setVisible(true);
         buyField.setVisible(true);
         sellField.setVisible(true);
+    }
+
+    public void displayPortfolio(JLabel label, User user){
+        label.setText(((control.User) user).getAccount().portfolioToString());
     }
 
     //@Override

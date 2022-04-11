@@ -95,5 +95,19 @@ public class Account{
         freeBalance += amount;
         return 1;
     }
+
+    public String portfolioToString(){
+        String result = "Stocks owned:";
+        for (int i=0; i < portfolio.size(); i++){
+            result += " " + portfolio.get(i).toString() + ";";
+        }
+        return result;
+    }
+
+
+
+
+
+
     //create method to calculate totBalance 
 }

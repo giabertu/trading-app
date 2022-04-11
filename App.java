@@ -131,6 +131,7 @@ public class App{
               int output = user.getAccount().buyStock(frame.currentStock, amount);
               if (output == 1){
                 frame.displayAccount(frame.accountInfo, user);
+                frame.displayPortfolio(frame.portfolioLabel, user);
                 JOptionPane.showMessageDialog(null, "Purchase successful! You just bought some " + frame.currentStock.getName() + " stock.", "Purchase Information", JOptionPane.INFORMATION_MESSAGE);
               }
             } catch (IOException e1) {JOptionPane.showMessageDialog(null, "Invalid buy. Try again", "Purchase Error", JOptionPane.ERROR_MESSAGE);}
@@ -147,6 +148,7 @@ public class App{
               int output = user.getAccount().sellStock(frame.currentStock, amount);
               if (output == 1){
                 frame.displayAccount(frame.accountInfo, user);
+                frame.displayPortfolio(frame.portfolioLabel, user);
                 JOptionPane.showMessageDialog(null, "Sale successful! You just sold some " +
                 frame.currentStock.getName() + " stock.", "Sale Information", JOptionPane.INFORMATION_MESSAGE);
               }
