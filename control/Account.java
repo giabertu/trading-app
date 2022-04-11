@@ -57,34 +57,43 @@ public class Account{
         totBalance = totBalance.add(new BigDecimal(freeBalance));
     }
 
-    public void buyStock(StockWrapper stock, double amount) throws IOException{
+    public int buyStock(StockWrapper stock, double amount) throws IOException{
         if(amount > freeBalance){
             JOptionPane.showMessageDialog(null, "You don't have enough free funds for this transation", "Purchase Error", JOptionPane.ERROR_MESSAGE);
-            return;
+            return -1;
         }
         else if(portfolio.contains(stock)){
             portfolio.get(portfolio.indexOf(stock)).addShares(amount);;
-            return;
+            return 1;
         }
         StockSharePair stockOwned = new StockSharePair(stock, new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
         portfolio.add(stockOwned);
         freeBalance -= amount;
+        return 1;
     }
 
-    public void sellStock(StockWrapper stock, double amount) throws IOException{
+    public int sellStock(StockWrapper stock, double amount) throws IOException{
         BigDecimal bdAmount = new BigDecimal(amount);
-        BigDecimal valueSharesOwned = portfolio.get(portfolio.indexOf(stock)).getTotValue(); 
+        int indexOfStock = -1;
+        for (int i = 0; i < portfolio.size(); i ++){
+            if (portfolio.get(i).equals(new StockSharePair(stock, new BigDecimal(0)))){
+                indexOfStock = i;
+                break;
+            }
+        }
+        BigDecimal valueSharesOwned = portfolio.get(indexOfStock).getTotValue(); 
         if (bdAmount.compareTo(valueSharesOwned) == 1){
             JOptionPane.showMessageDialog(null, "You don't have enough shares to sell", "Sale Error", JOptionPane.ERROR_MESSAGE);
-            return; 
+            return -1; 
         }
         else if(bdAmount.compareTo(valueSharesOwned) == 0){
             portfolio.remove(stock);
             freeBalance += amount;
-            return;
+            return 1;
         }
-        portfolio.get(portfolio.indexOf(stock)).removeShares(amount);
+        portfolio.get(indexOfStock).removeShares(amount);
         freeBalance += amount;
+        return 1;
     }
     //create method to calculate totBalance 
 }

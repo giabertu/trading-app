@@ -128,9 +128,12 @@ public class App{
           if (e.getSource() == frame.buttonBuy){
             double amount = Validation.inputDouble(frame.buyField.getText());
             try {
-              user.getAccount().buyStock(frame.currentStock, amount);
-              frame.displayAccount(frame.accountInfo, user);
-            } catch (IOException e1) {}
+              int output = user.getAccount().buyStock(frame.currentStock, amount);
+              if (output == 1){
+                frame.displayAccount(frame.accountInfo, user);
+                JOptionPane.showMessageDialog(null, "Purchase successful! You just bought some " + frame.currentStock.getName() + " stock.", "Purchase Information", JOptionPane.INFORMATION_MESSAGE);
+              }
+            } catch (IOException e1) {JOptionPane.showMessageDialog(null, "Invalid buy. Try again", "Purchase Error", JOptionPane.ERROR_MESSAGE);}
           }
         }
       });
@@ -140,7 +143,14 @@ public class App{
         public void actionPerformed(ActionEvent e){
           if (e.getSource()== frame.buttonSell){
             double amount = Validation.inputDouble(frame.sellField.getText());
-            
+            try {
+              int output = user.getAccount().sellStock(frame.currentStock, amount);
+              if (output == 1){
+                frame.displayAccount(frame.accountInfo, user);
+                JOptionPane.showMessageDialog(null, "Sale successful! You just sold some " +
+                frame.currentStock.getName() + " stock.", "Sale Information", JOptionPane.INFORMATION_MESSAGE);
+              }
+            } catch (IOException e1) {JOptionPane.showMessageDialog(null, "Invalid sale. Try again");}
           }
         }
       });

@@ -111,11 +111,11 @@ public class AppFrame<User> extends JFrame implements Frame {
         JPanel panel4 = new JPanel();
         JPanel centerPanel = new JPanel();
 
-        panel1.setBackground(Color.RED);
+        panel1.setBackground(Color.white);
         panel2.setBackground(Color.GREEN);
         panel3.setBackground(Color.YELLOW);
         panel4.setBackground(Color.MAGENTA);
-        centerPanel.setBackground(Color.BLUE);
+        centerPanel.setBackground(Color.white);
 
         //centerPanel.setLayout(new GridLayout());
 

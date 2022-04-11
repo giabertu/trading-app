@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 
 import model.StockWrapper;
 import service.StockService;
+import yahoofinance.Stock;
 
 public class StockSharePair {
 
@@ -44,5 +45,14 @@ public class StockSharePair {
 
     public BigDecimal getTotValue(){
         return totValue;
+    }
+
+    public boolean equals(Object obj){
+        if (obj instanceof StockSharePair){
+            StockSharePair stockGiven = (StockSharePair) obj;
+            if (stockGiven.getStock().getName().equals(this.stock.getName()))
+                return true;
+        }
+        return false;
     }
 }
