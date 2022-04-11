@@ -57,6 +57,6 @@ public class StockSharePair {
     }
     
     public String toString(){
-        return "" + stock.getName() + ", $" + totValue;
+        return "" + stock.getName() + ", " + sharesOwned + " shares";
     }
 }

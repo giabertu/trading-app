@@ -7,22 +7,21 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
+import javax.swing.text.html.HTML;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import control.User;
 import model.StockWrapper;
-import service.StockService;
 
 
-public class AppFrame<User> extends JFrame implements Frame {
+public class AppFrame<User> extends JFrame {
     
     public JButton buttonDeposit;
     public JButton buttonWithdraw;
@@ -48,11 +47,11 @@ public class AppFrame<User> extends JFrame implements Frame {
 
     public AppFrame() {
 
-        this.setSize(700,700); //sets initial x and y dimension
+        this.setSize(800,700); //sets initial x and y dimension
         this.setTitle("Stock Trading App"); //gives a title to the frame (shown on top of it)
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //this makes sure that the app is killed
         //when you press on the close button, instead of hiding it.
-        this.setIconImage(new ImageIcon("appIcon.png").getImage());
+        //this.setIconImage(new ImageIcon("appIcon.png").getImage());
         this.getContentPane().setBackground(Color.lightGray); //change background color.
     
         //this.setResizable(false); //this prevents the frame from being resized
@@ -66,68 +65,32 @@ public class AppFrame<User> extends JFrame implements Frame {
         this.setVisible(true); //make frame visible
     }
 
-    @Override
-    public FrameLabel addLabel(String title, int vertPos, int horPos){
-        FrameLabel label = new FrameLabel(title, vertPos, horPos);
-        this.add(label);
-        return label;
-    }
-
-    @Override
-    public FrameLabel addLabel(String title, int vertPos, int horPos, String icon){
-        FrameLabel label = new FrameLabel(title, vertPos, horPos, icon);
-        this.add(label);
-        return label;
-    }
-
-    public void addAllLabels(){
-       //this.addLabel("Portfolio", "portfolioIcon.png"); //note that if you set layout to null you wont see the label. 
-    }
-
-
-    //returns the panel, such that it is possible to add labels to individual panels.
-    public FramePanel addPanel(Color color, int x, int y, int width, int height){
-        FramePanel panel = new FramePanel(color, x, y, width, height);
-        this.add(panel);
-        return panel;
-    }
-
-    public PanelButton addButton(int x, int y, int width, int height){
-        PanelButton button = new PanelButton(x, y, width, height);
-        this.add(button);
-        return button;
-    }
-
-    public void addAllButtons(){
-        PanelButton button = addButton(200, 100, 100 , 50);
-    }
-
-
     public void addAllPanels(){
 
         /************************ CREATING, ADDING PANELS***************/
         JPanel panel1 = new JPanel();
-        JPanel panel2 = new JPanel();
+        JPanel westPanel = new JPanel();
         JPanel panel3 = new JPanel();
         JPanel bottomPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
         panel1.setBackground(Color.white);
-        panel2.setBackground(Color.GREEN);
+        westPanel.setBackground(Color.WHITE);
         panel3.setBackground(Color.YELLOW);
         bottomPanel.setBackground(Color.white);
         centerPanel.setBackground(Color.white);
 
         //centerPanel.setLayout(new GridLayout());
+        westPanel.setLayout(new GridLayout(7, 1, 10, 0));
 
         panel1.setPreferredSize(new Dimension(100,100));
-        panel2.setPreferredSize(new Dimension(100,100));
+        westPanel.setPreferredSize(new Dimension(100,100));
         panel3.setPreferredSize(new Dimension(100,100));
         bottomPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setPreferredSize(new Dimension(100,100));
 
         this.add(panel1, BorderLayout.NORTH);
-        this.add(panel2, BorderLayout.WEST);
+        this.add(westPanel, BorderLayout.WEST);
         this.add(panel3, BorderLayout.EAST);
         this.add(bottomPanel, BorderLayout.SOUTH);
         this.add(centerPanel, BorderLayout.CENTER);
@@ -142,9 +105,9 @@ public class AppFrame<User> extends JFrame implements Frame {
 
         buttonDeposit.setText("Deposit");
         buttonWithdraw.setText("Withdraw");
-        accountInfo.setText("Account Value: $0"  +
-         "\nFree balance: $0");
-        accountInfo.setFont(new Font("Arial", Font.BOLD, 40));
+        accountInfo.setText("<html><body>Account Value: $0"  +
+         "<br>Free balance: $0<body><html>");
+        accountInfo.setFont(new Font("Arial", Font.BOLD, 35));
 
         depositField = new JTextField();
         withdrawField = new JTextField();
@@ -205,7 +168,7 @@ public class AppFrame<User> extends JFrame implements Frame {
         centerPanel.add(sellField);
 
 
-        /****************************BOTTOM PANEL*****************8**** */
+        /****************************BOTTOM PANEL********************* */
 
         portfolioLabel = new JLabel();
 
@@ -214,54 +177,40 @@ public class AppFrame<User> extends JFrame implements Frame {
 
         bottomPanel.add(portfolioLabel);
 
+        /****************************WEST PANEL********************** */
+        JLabel suggested = new JLabel("  Search...");
+        JLabel suggestedTicker1 = new JLabel();
+        JLabel suggestedTicker2 = new JLabel();
+        JLabel suggestedTicker3 = new JLabel();
+        JLabel suggestedTicker4 = new JLabel();
+        JLabel suggestedTicker5 = new JLabel();
+        JLabel suggestedTicker6 = new JLabel();
 
 
+        suggestedTicker1.setText("   MSFT");
+        suggestedTicker2.setText("   TWTR");
+        suggestedTicker3.setText("   AAPL");
+        suggestedTicker4.setText("   TSLA");
+        suggestedTicker5.setText("   NVDA");
+        suggestedTicker6.setText("   GM");
+
+        suggested.setFont(new Font("Arial", Font.BOLD, 20));
+        suggestedTicker1.setFont(new Font("Arial", Font.ITALIC, 20));
+        suggestedTicker2.setFont(new Font("Arial", Font.ITALIC, 20));
+        suggestedTicker3.setFont(new Font("Arial", Font.ITALIC, 20));
+        suggestedTicker4.setFont(new Font("Arial", Font.ITALIC, 20));
+        suggestedTicker5.setFont(new Font("Arial", Font.ITALIC, 20));
+        suggestedTicker6.setFont(new Font("Arial", Font.ITALIC, 20));
+
+        westPanel.add(suggested);
+        westPanel.add(suggestedTicker1);
+        westPanel.add(suggestedTicker2);
+        westPanel.add(suggestedTicker3);
+        westPanel.add(suggestedTicker4);
+        westPanel.add(suggestedTicker5);
+        westPanel.add(suggestedTicker6);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /**6
-
-        //FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
-        //FramePanel bluePanel = this.addPanel(Color.BLUE, 150, 0, 600, 250);
-        //FramePanel greenPanel = this.addPanel(Color.GREEN, 750, 0, 150, 700);
-        bluePanel.setLayout(null);
-        //greenPanel.addLabel("Portfolio", 0, 0, "portfolio.png");
-        //PanelButton button = bluePanel.addButton(200, 100, 100, 50);
-        buttonDeposit = new PanelButton(0, 150 , 100, 40);
-        buttonDeposit.setText("Deposit");
-        buttonDeposit.setFont(new Font("Arial", Font.PLAIN, 15));
-        //buttonDeposit.setFocusable(false);
-        //buttonDeposit.addActionListener(this);
-        bluePanel.add(buttonDeposit);
-        depositField = new JTextField();
-        //depositField.setPreferredSize(new Dimension(80,30));
-        depositField.setBounds(125, 150, 80, 40);
-        bluePanel.add(depositField);
-
-        buttonWithdraw = new PanelButton(300, 150 , 100, 40);
-        buttonWithdraw.setText("Withdraw");
-        buttonWithdraw.setFont(new Font("Arial", Font.PLAIN, 15));
-        //buttonDeposit.setFocusable(false);
-        //buttonDeposit.addActionListener(this);
-        bluePanel.add(buttonWithdraw);
-        withdrawField = new JTextField();
-        //withdrawField.setPreferredSize(new Dimension(80,30));
-        depositField.setBounds(425, 150, 80, 40);
-        bluePanel.add(withdrawField);
-        */
     }
 
     public void addAllMenus(){
@@ -292,8 +241,8 @@ public class AppFrame<User> extends JFrame implements Frame {
     }
 
     public void displayAccount(JLabel label, User user){
-        label.setText("Account Value: $" + ((control.User) user).getAccount().getTotBalance() +
-         "\nFree balance: $" + ((control.User) user).getAccount().getFreeBalance());
+        label.setText("<html><body>Account Value: $" + ((control.User) user).getAccount().getTotBalance() +
+         "<br>Free balance: $" + ((control.User) user).getAccount().getFreeBalance()+ "<body><html>");
     }
 
     public void displayStock(JLabel label, StockWrapper stock) throws IOException{

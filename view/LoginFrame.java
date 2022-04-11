@@ -29,8 +29,9 @@ public class LoginFrame extends JFrame {
     }
 
     public void addAllButtonsAndFields() {
-        FramePanel panel = new FramePanel(Color.WHITE, 0, 0, 400, 400);
-
+        JPanel panel = new JPanel();
+        
+        panel.setBackground(Color.WHITE);
         JLabel l = new JLabel("Username", JLabel.TRAILING);
         panel.add(l);
         usernameField = new JTextField();
