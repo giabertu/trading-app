@@ -77,11 +77,11 @@ public class App{
       frame.addButtonDepositActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("I was pressed");
+
             if(e.getSource() == frame.buttonDeposit){
               try{
                 int amount = Validation.inputInt(frame.depositField.getText());
-                System.out.println(amount);
+
                 user.getAccount().deposit(amount);
                 frame.displayAccount(frame.accountInfo, user);
               }
@@ -96,11 +96,10 @@ public class App{
       frame.addButtonWithdrawActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("I was pressed");
+
             if(e.getSource() == frame.buttonWithdraw){
               try{
                 int amount = Validation.inputInt(frame.withdrawField.getText());
-                System.out.println(amount);
                 user.getAccount().withdraw(amount);
                 frame.displayAccount(frame.accountInfo, user);
               }
@@ -116,9 +115,32 @@ public class App{
             try{
               String ticker = Validation.inputString(frame.searchField.getText());
               StockWrapper stock = new StockService().findStock(ticker);
-              
+              frame.displayStock(frame.stockLabel, stock);
             }
             catch(DigitOnlyException | IOException dException){JOptionPane.showMessageDialog(null, "Invalid ticker. Try again");}
+          }
+        }
+      });
+
+      frame.AddButtonBuyActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+          if (e.getSource() == frame.buttonBuy){
+            double amount = Validation.inputDouble(frame.buyField.getText());
+            try {
+              user.getAccount().buyStock(frame.currentStock, amount);
+              frame.displayAccount(frame.accountInfo, user);
+            } catch (IOException e1) {}
+          }
+        }
+      });
+
+      frame.AddButtonSellActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+          if (e.getSource()== frame.buttonSell){
+            double amount = Validation.inputDouble(frame.sellField.getText());
+            
           }
         }
       });
