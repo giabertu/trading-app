@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import javax.swing.JOptionPane;
 
 import control.Authentication;
+import control.DigitOnlyException;
 import control.User;
 import control.Validation;
 import model.StockWrapper;
@@ -106,6 +107,19 @@ public class App{
         }
       });
 
+      frame.addButtonSearchActionListener(new ActionListener(){
+        @Override
+        public void actionPerformed(ActionEvent e){
+          if (e.getSource() == frame.buttonSearch){
+            try{
+              String ticker = Validation.inputString(frame.searchField.getText());
+              StockWrapper stock = new StockService().findStock(ticker);
+              
+            }
+            catch(DigitOnlyException | IOException dException){JOptionPane.showMessageDialog(null, "Invalid ticker. Try again");}
+          }
+        }
+      });
     }
 
 }

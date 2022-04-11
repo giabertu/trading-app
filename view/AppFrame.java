@@ -22,14 +22,20 @@ public class AppFrame<User> extends JFrame implements Frame {
     
     public JButton buttonDeposit;
     public JButton buttonWithdraw;
+    public JButton buttonSearch;
+
     public JTextField depositField;
     public JTextField withdrawField;
+    public JTextField searchField;
+
     public JLabel accountInfo;
+    public JLabel searchLabel;
+
     public JMenuBar menuBar = new JMenuBar();
 
     public AppFrame() {
 
-        this.setSize(900,700); //sets initial x and y dimension
+        this.setSize(700,700); //sets initial x and y dimension
         this.setTitle("Stock Trading App"); //gives a title to the frame (shown on top of it)
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //this makes sure that the app is killed
         //when you press on the close button, instead of hiding it.
@@ -99,6 +105,8 @@ public class AppFrame<User> extends JFrame implements Frame {
         panel4.setBackground(Color.MAGENTA);
         centerPanel.setBackground(Color.BLUE);
 
+        //centerPanel.setLayout(new GridLayout());
+
         panel1.setPreferredSize(new Dimension(100,100));
         panel2.setPreferredSize(new Dimension(100,100));
         panel3.setPreferredSize(new Dimension(100,100));
@@ -111,7 +119,8 @@ public class AppFrame<User> extends JFrame implements Frame {
         this.add(panel4, BorderLayout.SOUTH);
         this.add(centerPanel, BorderLayout.CENTER);
 
-        /*********************** CENTER PANEL*************************/
+        /*********************** TOP PANEL*************************/
+        accountInfo = new JLabel();
         buttonDeposit = new JButton();
         buttonWithdraw = new JButton();
 
@@ -120,6 +129,9 @@ public class AppFrame<User> extends JFrame implements Frame {
 
         buttonDeposit.setText("Deposit");
         buttonWithdraw.setText("Withdraw");
+        accountInfo.setText("Account Value: $0"  +
+         "\nFree balance: $0");
+        accountInfo.setFont(new Font("Arial", Font.BOLD, 40));
 
         depositField = new JTextField();
         withdrawField = new JTextField();
@@ -127,24 +139,36 @@ public class AppFrame<User> extends JFrame implements Frame {
         depositField.setPreferredSize(new Dimension(75, 20));
         withdrawField.setPreferredSize(new Dimension(75, 20));
 
-
-        centerPanel.add(buttonDeposit);
-        centerPanel.add(depositField);
-
-        centerPanel.add(buttonWithdraw);
-        centerPanel.add(withdrawField);
-
-        /***********************TOP PANEL************************* */
-        accountInfo = new JLabel();
-        accountInfo.setText("Account Value: $0"  +
-         "\nFree balance: $0");
-        
         panel1.add(accountInfo);
+        panel1.add(buttonDeposit);
+        panel1.add(depositField);
+
+        panel1.add(buttonWithdraw);
+        panel1.add(withdrawField);
+
+        //Search Field stock:
+
+        searchLabel = new JLabel("Search Stock Ticker:");
+        searchField = new JTextField();
+        buttonSearch = new JButton("Search Stock");
+
+        searchLabel.setLabelFor(searchField);
+        searchLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        searchLabel.setBounds(0, 50, 30, 30);
+
+        searchField.setPreferredSize(new Dimension(100,30));
+        searchField.setBounds(45, 50, 75, 20);
+
+        buttonSearch.setPreferredSize(new Dimension(130, 30));
+
+        centerPanel.add(searchLabel);
+        centerPanel.add(searchField);
+        centerPanel.add(buttonSearch);
 
 
 
 
-        /**
+        /**6
 
         //FramePanel orangePanel = this.addPanel(Color.ORANGE, 0, 0, 150, 700);
         //FramePanel bluePanel = this.addPanel(Color.BLUE, 150, 0, 600, 250);
@@ -189,6 +213,10 @@ public class AppFrame<User> extends JFrame implements Frame {
 
     public void addButtonWithdrawActionListener(ActionListener listener) {
         buttonWithdraw.addActionListener(listener);
+    }
+
+    public void addButtonSearchActionListener(ActionListener listener){
+        buttonSearch.addActionListener(listener);
     }
 
     public void displayAccount(JLabel label, User user){

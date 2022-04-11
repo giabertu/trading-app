@@ -9,5 +9,13 @@ public class Validation {
           input = Integer.parseInt(JOptionPane.showInputDialog(null, "The number you inserted is not valid. Try again here."));
         }
         return input;
+    }
+
+    public static String inputString(String message){
+      if(message.matches("[0-9]+")){
+        throw new DigitOnlyException();
       }
+      return message.trim().toUpperCase();
+    }
+  
 }

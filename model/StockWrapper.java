@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.jfree.chart.JFreeChart;
+
 import service.StockService;
 import yahoofinance.Stock;
 
@@ -30,6 +32,10 @@ public class StockWrapper {
 
     public String getName() {
         return stock.getName();
+    }
+
+    public void createChart(){
+        JFreeChart chart = new JFreeChart();
     }
     
 }
