@@ -42,7 +42,7 @@ public class Account{
 
     public void withdraw(int amount){
         if(amount > freeBalance){
-            JOptionPane.showInputDialog(null, "You are trying to withdraw more than you hold.");
+            JOptionPane.showMessageDialog(null, "You are trying to withdraw more than you hold.", "Withdraw Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         freeBalance -= amount;

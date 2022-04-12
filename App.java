@@ -18,21 +18,10 @@ import service.StockService;
 public class App{
 
     public static void main(String[] args) throws IOException {
-
       LoginFrame loginFrame = new LoginFrame();
       addLoginActionListener(loginFrame);
       AppFrame frame = loginFrame.newFrame;
-
-
-      StockService stockService = new StockService();
-		  StockWrapper stock = stockService.findStock("AAPL");
-		  System.out.println(stock.getStock());
-		  BigDecimal stockPrice = stockService.findPrice(stock);
-      System.out.println(stock.getStock().getHistory().get(12).getHigh());
-      System.out.println(stock.getStock().getHistory().size());
-		  System.out.println(stockPrice);
-
-
+      
     }
 
     public static void addLoginActionListener(LoginFrame loginFrame){
