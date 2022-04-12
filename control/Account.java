@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import model.StockWrapper;
-import service.StockService;
 
 public class Account{
 
@@ -58,12 +57,14 @@ public class Account{
     }
 
     public int buyStock(StockWrapper stock, double amount) throws IOException{
+        StockSharePair stockGiven = new StockSharePair(stock, new BigDecimal(0)); 
+        
         if(amount > freeBalance){
             JOptionPane.showMessageDialog(null, "You don't have enough free funds for this transation", "Purchase Error", JOptionPane.ERROR_MESSAGE);
             return -1;
         }
-        else if(portfolio.contains(stock)){
-            portfolio.get(portfolio.indexOf(stock)).addShares(amount);;
+        else if(portfolio.contains(stockGiven)){
+            portfolio.get(portfolio.indexOf(new StockSharePair(stock, new BigDecimal(0)))).addShares(amount);;
             return 1;
         }
         StockSharePair stockOwned = new StockSharePair(stock, new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
@@ -73,10 +74,11 @@ public class Account{
     }
 
     public int sellStock(StockWrapper stock, double amount) throws IOException{
+        StockSharePair stockGiven = new StockSharePair(stock, new BigDecimal(0)); 
         BigDecimal bdAmount = new BigDecimal(amount);
         int indexOfStock = -1;
         for (int i = 0; i < portfolio.size(); i ++){
-            if (portfolio.get(i).equals(new StockSharePair(stock, new BigDecimal(0)))){
+            if (portfolio.get(i).equals(stockGiven)){
                 indexOfStock = i;
                 break;
             }
@@ -87,7 +89,7 @@ public class Account{
             return -1; 
         }
         else if(bdAmount.compareTo(valueSharesOwned) == 0){
-            portfolio.remove(stock);
+            portfolio.remove(stockGiven);
             freeBalance += amount;
             return 1;
         }
@@ -103,11 +105,4 @@ public class Account{
         }
         return result;
     }
-
-
-
-
-
-
-    //create method to calculate totBalance 
 }

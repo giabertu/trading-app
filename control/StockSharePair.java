@@ -5,7 +5,6 @@ import java.math.RoundingMode;
 
 import model.StockWrapper;
 import service.StockService;
-import yahoofinance.Stock;
 
 public class StockSharePair {
 

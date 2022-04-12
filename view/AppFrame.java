@@ -1,5 +1,4 @@
 package view;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,10 +6,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.text.html.HTML;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.awt.Color;
@@ -21,7 +19,7 @@ import control.User;
 import model.StockWrapper;
 
 
-public class AppFrame<User> extends JFrame {
+public class AppFrame extends JFrame {
     
     public JButton buttonDeposit;
     public JButton buttonWithdraw;
