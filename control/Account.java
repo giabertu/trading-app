@@ -5,12 +5,12 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-import model.StockWrapper;
+import model.AssetWrapper;
 
 public class Account{
 
     private int freeBalance;
-    private ArrayList<StockSharePair> portfolio;
+    private ArrayList<AssetSharePair> portfolio;
     private BigDecimal totBalance;
     
     public Account(){
@@ -56,25 +56,25 @@ public class Account{
         totBalance = totBalance.add(new BigDecimal(freeBalance));
     }
 
-    public int buyStock(StockWrapper stock, double amount) throws IOException{
-        StockSharePair stockGiven = new StockSharePair(stock, new BigDecimal(0)); 
+    public int buyAsset(AssetWrapper stock, double amount) throws IOException{
+        AssetSharePair stockGiven = new AssetSharePair(stock, new BigDecimal(0)); 
         
         if(amount > freeBalance){
             JOptionPane.showMessageDialog(null, "You don't have enough free funds for this transation", "Purchase Error", JOptionPane.ERROR_MESSAGE);
             return -1;
         }
         else if(portfolio.contains(stockGiven)){
-            portfolio.get(portfolio.indexOf(new StockSharePair(stock, new BigDecimal(0)))).addShares(amount);;
+            portfolio.get(portfolio.indexOf(new AssetSharePair(stock, new BigDecimal(0)))).addShares(amount);;
             return 1;
         }
-        StockSharePair stockOwned = new StockSharePair(stock, new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
+        AssetSharePair stockOwned = new AssetSharePair(stock, new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
         portfolio.add(stockOwned);
         freeBalance -= amount;
         return 1;
     }
 
-    public int sellStock(StockWrapper stock, double amount) throws IOException{
-        StockSharePair stockGiven = new StockSharePair(stock, new BigDecimal(0)); 
+    public int sellAsset(AssetWrapper stock, double amount) throws IOException{
+        AssetSharePair stockGiven = new AssetSharePair(stock, new BigDecimal(0)); 
         BigDecimal bdAmount = new BigDecimal(amount);
         int indexOfStock = -1;
         for (int i = 0; i < portfolio.size(); i ++){

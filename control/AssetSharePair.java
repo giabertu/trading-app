@@ -3,33 +3,33 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import model.StockWrapper;
-import service.StockService;
+import model.AssetWrapper;
+import service.AssetService;
 
-public class StockSharePair {
+public class AssetSharePair {
 
-    private StockWrapper stock;
+    private AssetWrapper asset;
     private BigDecimal sharesOwned;
     private BigDecimal totValue;
 
-    public StockSharePair(StockWrapper stock, BigDecimal sharesOwned) throws IOException{
-        this.stock = stock;
+    public AssetSharePair(AssetWrapper asset, BigDecimal sharesOwned) throws IOException{
+        this.asset = asset;
         this.sharesOwned = sharesOwned;
         calculateTotValue();
     }
     
     public void calculateTotValue() throws IOException{
-        totValue = new StockService().findPrice(this.stock).multiply(sharesOwned);
+        totValue = new AssetService().findPrice(this.asset).multiply(sharesOwned);
     }
 
     public void addShares(double amount) throws IOException{
-        sharesOwned = sharesOwned.add(new BigDecimal(amount).divide(stock.getPrice(), 2, RoundingMode.HALF_UP));
+        sharesOwned = sharesOwned.add(new BigDecimal(amount).divide(asset.getPrice(), 2, RoundingMode.HALF_UP));
         calculateTotValue();
     }
 
     public void removeShares(double amount) throws IOException{
         BigDecimal newTotValue = totValue.subtract(new BigDecimal(amount));
-        BigDecimal newSharesOwned = newTotValue.divide(stock.getPrice(), 2, RoundingMode.HALF_UP);
+        BigDecimal newSharesOwned = newTotValue.divide(asset.getPrice(), 2, RoundingMode.HALF_UP);
         sharesOwned = newSharesOwned;
         calculateTotValue();
     }
@@ -38,8 +38,8 @@ public class StockSharePair {
         return sharesOwned;
     }
 
-    public StockWrapper getStock(){
-        return stock;
+    public AssetWrapper getAsset(){
+        return asset;
     }
 
     public BigDecimal getTotValue(){
@@ -47,15 +47,15 @@ public class StockSharePair {
     }
 
     public boolean equals(Object obj){
-        if (obj instanceof StockSharePair){
-            StockSharePair stockGiven = (StockSharePair) obj;
-            if (stockGiven.getStock().getName().equals(this.stock.getName()))
+        if (obj instanceof AssetSharePair){
+            AssetSharePair stockGiven = (AssetSharePair) obj;
+            if (stockGiven.getAsset().getName().equals(this.asset.getName()))
                 return true;
         }
         return false;
     }
     
     public String toString(){
-        return "" + stock.getName() + ", " + sharesOwned + " shares";
+        return "" + asset.getName() + ", " + sharesOwned + " shares";
     }
 }

@@ -16,7 +16,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import control.User;
-import model.StockWrapper;
+import model.AssetWrapper;
 
 
 public class AppFrame extends JFrame {
@@ -24,28 +24,34 @@ public class AppFrame extends JFrame {
     public JButton buttonDeposit;
     public JButton buttonWithdraw;
     public JButton buttonSearch;
+    public JButton buttonCryptoSearch;
+
     public JButton buttonBuy;
     public JButton buttonSell;
 
     public JTextField depositField;
     public JTextField withdrawField;
     public JTextField searchField;
+    public JTextField searchCryptoField;
+
     public JTextField buyField;
     public JTextField sellField;
 
     public JLabel accountInfo;
     public JLabel searchLabel;
-    public JLabel stockLabel;
+    public JLabel searchCryptoLabel;
+
+    public JLabel assetLabel;
     public JLabel portfolioLabel;
 
-    public StockWrapper currentStock;
+    public AssetWrapper currentAsset;
 
 
     public JMenuBar menuBar = new JMenuBar();
 
     public AppFrame() {
 
-        this.setSize(800,700); //sets initial x and y dimension
+        this.setSize(1050,700); //sets initial x and y dimension
         this.setTitle("Stock Trading App"); //gives a title to the frame (shown on top of it)
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //this makes sure that the app is killed
         //when you press on the close button, instead of hiding it.
@@ -135,15 +141,28 @@ public class AppFrame extends JFrame {
 
         buttonSearch.setPreferredSize(new Dimension(130, 30));
 
+        searchCryptoLabel = new JLabel("Search Crypto Ticker:");
+        searchCryptoField = new JTextField();
+        buttonCryptoSearch = new JButton("Search Crypto");
+
+        searchCryptoLabel.setLabelFor(searchCryptoField);
+        searchCryptoLabel.setFont(new Font("Arial", Font.BOLD, 15));
+
+        searchCryptoField.setPreferredSize(new Dimension(100,30));
+
         centerPanel.add(searchLabel);
         centerPanel.add(searchField);
         centerPanel.add(buttonSearch);
 
+        centerPanel.add(searchCryptoLabel);
+        centerPanel.add(searchCryptoField);
+        centerPanel.add(buttonCryptoSearch);
+
         //display stock and price
-        stockLabel = new JLabel();
-        stockLabel.setText("No stock has been searched yet.");
-        stockLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        centerPanel.add(stockLabel);
+        assetLabel = new JLabel();
+        assetLabel.setText("No Asset has been searched yet.");
+        assetLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        centerPanel.add(assetLabel);
 
         //buy and sell buttons
         buttonBuy = new JButton("Buy");
@@ -170,7 +189,7 @@ public class AppFrame extends JFrame {
 
         portfolioLabel = new JLabel();
 
-        portfolioLabel.setText("No Stocks Owned");
+        portfolioLabel.setText("No Assets Owned");
         portfolioLabel.setFont(new Font("Arial", Font.PLAIN, 20));
 
         bottomPanel.add(portfolioLabel);
@@ -228,6 +247,10 @@ public class AppFrame extends JFrame {
 
     public void addButtonSearchActionListener(ActionListener listener){
         buttonSearch.addActionListener(listener);
+        buttonCryptoSearch.addActionListener(listener);
+    }
+    public void addButtonCryptoSearchActionListener(ActionListener listener){
+        buttonCryptoSearch.addActionListener(listener);
     }
 
     public void AddButtonBuyActionListener(ActionListener listener){
@@ -243,9 +266,9 @@ public class AppFrame extends JFrame {
          "<br>Free balance: $" + ((control.User) user).getAccount().getFreeBalance()+ "<body><html>");
     }
 
-    public void displayStock(JLabel label, StockWrapper stock) throws IOException{
-        label.setText("You searched for: " + stock.getName() + ", which has price " + stock.getPrice().toString());
-        currentStock = stock;
+    public void displayAsset(JLabel label, AssetWrapper asset) throws IOException{
+        label.setText("You searched for: " + asset.getName() + ", which has price " + asset.getPrice().toString());
+        currentAsset = asset;
 
         buttonBuy.setVisible(true);
         buttonSell.setVisible(true);
@@ -256,12 +279,5 @@ public class AppFrame extends JFrame {
     public void displayPortfolio(JLabel label, User user){
         label.setText(((control.User) user).getAccount().portfolioToString());
     }
-
-    //@Override
-   // public void actionPerformed(ActionEvent e) {
-        //if(e.getSource() == buttonDeposit){
-        //  System.out.println("I was pressed");
-        //}
-   // }
 
 }

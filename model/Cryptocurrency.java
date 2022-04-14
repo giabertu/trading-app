@@ -1,22 +1,11 @@
 package model;
+import yahoofinance.Stock;
 
-public abstract class Cryptocurrency extends Asset {
+public class Cryptocurrency extends AssetWrapper {
 
-    private final String name;
-    private final double exchangeRate;
+   public Cryptocurrency(Stock crypto){
+        super(crypto);
+   }
 
-    public Cryptocurrency(String name, double exchangeRate){
-        super("Intangible");
-        this.name = name;
-        this.exchangeRate = exchangeRate;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public double getExchangeRate(){
-        return exchangeRate;
-    }
 }
 
