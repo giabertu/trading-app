@@ -1,5 +1,3 @@
-package control;
-
 public class DigitOnlyException extends RuntimeException {
 
     public DigitOnlyException(){

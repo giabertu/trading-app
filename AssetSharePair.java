@@ -1,11 +1,7 @@
-package control;
+
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-import model.AssetWrapper;
-import service.AssetService;
-
 public class AssetSharePair {
 
     private AssetWrapper asset;

@@ -1,4 +1,4 @@
-package control;
+
 import javax.swing.JOptionPane;
 
 public class Validation {

@@ -1,8 +1,8 @@
-package model;
+
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import service.AssetService;
+
 import yahoofinance.Stock;
 
 public class AssetWrapper{

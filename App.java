@@ -1,18 +1,10 @@
-import view.AppFrame;
-import view.LoginFrame;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 
-import control.Authentication;
-import control.DigitOnlyException;
-import control.User;
-import control.Validation;
-import model.AssetWrapper;
-import service.AssetService;
+
 public class App{
 
     public static void main(String[] args) throws IOException {

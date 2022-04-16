@@ -1,4 +1,4 @@
-package view;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,9 +15,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import control.User;
-import model.AssetWrapper;
-
 
 public class AppFrame extends JFrame {
     
@@ -262,8 +259,8 @@ public class AppFrame extends JFrame {
     }
 
     public void displayAccount(JLabel label, User user){
-        label.setText("<html><body>Account Value: $" + ((control.User) user).getAccount().getTotBalance() +
-         "<br>Free balance: $" + ((control.User) user).getAccount().getFreeBalance()+ "<body><html>");
+        label.setText("<html><body>Account Value: $" + user.getAccount().getTotBalance() +
+         "<br>Free balance: $" + user.getAccount().getFreeBalance()+ "<body><html>");
     }
 
     public void displayAsset(JLabel label, AssetWrapper asset) throws IOException{
@@ -277,7 +274,7 @@ public class AppFrame extends JFrame {
     }
 
     public void displayPortfolio(JLabel label, User user){
-        label.setText(((control.User) user).getAccount().portfolioToString());
+        label.setText(user.getAccount().portfolioToString());
     }
 
 }

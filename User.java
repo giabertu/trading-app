@@ -1,5 +1,5 @@
 
-package control;
+
 public class User {
 
     private final String name;
