@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -19,10 +18,8 @@ public class LoginFrame extends JFrame {
     public LoginFrame() {
 
         this.setTitle("Login Window");
-        //this.setSize(400, 400);
         addAllButtonsAndFields();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setLayout(null);
         this.setResizable(false);
         this.pack();
         this.setVisible(true);

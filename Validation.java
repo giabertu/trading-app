@@ -1,4 +1,3 @@
-
 import javax.swing.JOptionPane;
 
 public class Validation {
@@ -18,9 +17,6 @@ public class Validation {
       }
       return input;
   }
-
-
-
     public static String inputString(String message){
       if(message.matches("[0-9]+")){
         throw new DigitOnlyException();

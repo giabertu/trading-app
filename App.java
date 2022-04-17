@@ -10,7 +10,6 @@ public class App{
     public static void main(String[] args) throws IOException {
       LoginFrame loginFrame = new LoginFrame();
       addLoginActionListener(loginFrame);
-      //AppFrame frame = loginFrame.newFrame;
 
     }
 
