@@ -268,8 +268,9 @@ public class AppFrame extends JFrame {
     }
 
     public void displayAccount(JLabel label, User user){
-        label.setText("<html><body>Account Value: $" + user.getAccount().getTotBalance() +
-         "<br>Free balance: $" + user.getAccount().getFreeBalance()+ "<body><html>");
+        //short str = user.getAccount().getTotBalance().shortValue();
+        label.setText("<html><body>Account Value: $" + user.getAccount().getTotBalance().intValue() +
+         "<br>Free balance: $" + user.getAccount().getFreeBalance() + "<body><html>");
     }
 
     public void displayAsset(JLabel label, AssetWrapper asset) throws IOException{
