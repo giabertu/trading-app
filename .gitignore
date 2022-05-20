@@ -5,7 +5,7 @@
 *.log
 
 #ds_store
-.DS_store
+.DS_Store
 
 #text file with credentials 
 login.txt
