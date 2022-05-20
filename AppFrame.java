@@ -48,22 +48,14 @@ public class AppFrame extends JFrame {
 
     public AppFrame() {
 
-        this.setSize(1050,700); //sets initial x and y dimension
-        this.setTitle("Stock Trading App"); //gives a title to the frame (shown on top of it)
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //this makes sure that the app is killed
-        //when you press on the close button, instead of hiding it.
-        //this.setIconImage(new ImageIcon("appIcon.png").getImage());
-        this.getContentPane().setBackground(Color.lightGray); //change background color.
-    
-        //this.setResizable(false); //this prevents the frame from being resized
-
+        this.setSize(1050,700); 
+        this.setTitle("Stock Trading App"); 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.getContentPane().setBackground(Color.lightGray); 
         this.setLayout(new BorderLayout(10,10));
         addAllPanels();
         addAllMenus();
-
-        //this.pack(); //sets the size of frame to accomodate all components. Make sure to add
-        //All components before using pack. 
-        this.setVisible(true); //make frame visible
+        this.setVisible(true); 
     }
 
     public void addAllPanels(){
@@ -71,28 +63,29 @@ public class AppFrame extends JFrame {
         /************************ CREATING, ADDING PANELS***************/
         JPanel panel1 = new JPanel();
         JPanel westPanel = new JPanel();
-        JPanel panel3 = new JPanel();
+        JPanel eastPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
         JPanel centerPanel = new JPanel();
 
         panel1.setBackground(Color.white);
         westPanel.setBackground(Color.WHITE);
-        panel3.setBackground(Color.YELLOW);
+        eastPanel.setBackground(Color.white);
         bottomPanel.setBackground(Color.white);
         centerPanel.setBackground(Color.white);
 
         //centerPanel.setLayout(new GridLayout());
         westPanel.setLayout(new GridLayout(7, 1, 10, 0));
+        eastPanel.setLayout(new GridLayout(3, 1, 10, 0));
 
         panel1.setPreferredSize(new Dimension(100,100));
         westPanel.setPreferredSize(new Dimension(100,100));
-        panel3.setPreferredSize(new Dimension(100,100));
+        eastPanel.setPreferredSize(new Dimension(100,100));
         bottomPanel.setPreferredSize(new Dimension(100,100));
         centerPanel.setPreferredSize(new Dimension(100,100));
 
         this.add(panel1, BorderLayout.NORTH);
         this.add(westPanel, BorderLayout.WEST);
-        this.add(panel3, BorderLayout.EAST);
+        this.add(eastPanel, BorderLayout.EAST);
         this.add(bottomPanel, BorderLayout.SOUTH);
         this.add(centerPanel, BorderLayout.CENTER);
 
@@ -223,8 +216,24 @@ public class AppFrame extends JFrame {
         westPanel.add(suggestedTicker4);
         westPanel.add(suggestedTicker5);
         westPanel.add(suggestedTicker6);
+        
+
+        /******************************EAST PANEL *********************** */
+        JLabel suggestedCrypto = new JLabel("  Search...");
+        JLabel suggestedCrypto1 = new JLabel();
+        JLabel suggestedCrypto2 = new JLabel();
 
 
+        suggestedCrypto1.setText("   BTC");
+        suggestedCrypto2.setText("   ETH");
+
+        suggestedCrypto.setFont(new Font("Arial", Font.BOLD, 20));
+        suggestedCrypto1.setFont(new Font("Arial", Font.ITALIC, 20));
+        suggestedCrypto2.setFont(new Font("Arial", Font.ITALIC, 20));
+
+        eastPanel.add(suggestedCrypto);
+        eastPanel.add(suggestedCrypto1);
+        eastPanel.add(suggestedCrypto2);
     }
 
     public void addAllMenus(){
