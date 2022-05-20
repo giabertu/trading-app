@@ -53,6 +53,9 @@ public class AssetSharePair {
     }
     
     public String toString(){
+        if (this.asset instanceof Cryptocurrency){
+            return "" + asset.getName() + ", " + sharesOwned + " coins"; 
+        }
         return "" + asset.getName() + ", " + sharesOwned + " shares";
     }
 }
