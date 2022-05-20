@@ -99,7 +99,7 @@ public class Account{
     }
 
     public String portfolioToString(){
-        String result = "Stocks owned:";
+        String result = "Assets owned:";
         for (int i=0; i < portfolio.size(); i++){
             result += " " + portfolio.get(i).toString() + ";";
         }
